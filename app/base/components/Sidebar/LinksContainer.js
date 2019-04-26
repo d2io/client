@@ -5,13 +5,20 @@
  */
 
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectRoutes } from 'containers/Auth/selectors';
+import { initRouteName } from 'containers/Auth/actions';
 import Links from './Links';
 
-function mapStateToProps(state) {
-  debugger;
-  return {
-    routes: state.sidebarRoute,
-  };
-}
+const mapStateToProps = createStructuredSelector({
+  routes: makeSelectRoutes(),
+});
 
-export default connect(mapStateToProps)(Links);
+const mapDispatchToProps = dispatch => ({
+  initRouteName: () => dispatch(initRouteName()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Links);

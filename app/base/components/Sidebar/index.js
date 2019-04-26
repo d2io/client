@@ -13,6 +13,17 @@ import image from 'assets/img/sidebar.jpg';
 import Links from './LinksContainer';
 import Brand from './Brand';
 
+// const routes = [
+//   {
+//     path: '/dashboard',
+//     name: 'Dashboard',
+//   },
+//   {
+//     path: '/picture',
+//     name: 'Picture',
+//   },
+// ];
+
 const Sidebar = ({ ...props }) => {
   const { classes } = props;
 
@@ -36,14 +47,15 @@ const Sidebar = ({ ...props }) => {
             <AdminNavbarLinks />
             <Links classes={classes} />
           </div>
-          {image !== undefined ? (
+          {image !== undefined && (
             <div
               className={classes.background}
               style={{ backgroundImage: `url(${image})` }}
             />
-          ) : null}
+          )}
         </Drawer>
       </Hidden>
+
       <Hidden smDown implementation="css">
         <Drawer
           anchor="left"
@@ -71,10 +83,9 @@ const Sidebar = ({ ...props }) => {
 
 Sidebar.propTypes = {
   classes: PropTypes.object.isRequired,
-  handleDrawerToggle: PropTypes.any,
+  handleDrawerToggle: PropTypes.func,
   location: PropTypes.object.isRequired,
-  open: PropTypes.any,
-  rtlActive: PropTypes.any,
+  open: PropTypes.bool,
 };
 
 export default withStyles(sidebarStyle)(Sidebar);

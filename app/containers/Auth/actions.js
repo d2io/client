@@ -5,6 +5,9 @@
  */
 
 import {
+  INIT_ROUTE_NAME,
+  INIT_ROUTE_NAME_FAILED,
+  INIT_ROUTE_NAME_SUCCESS,
   SET_CURRENT_USER,
   SIGNIN_FAILURE,
   SIGNIN_REQUEST,
@@ -36,4 +39,19 @@ export const signoutRequest = () => ({
 export const signoutSuccess = () => ({
   type: SIGNOUT_SUCCESS,
   payload: {},
+});
+
+// init route name
+export const initRouteName = () => ({
+  type: INIT_ROUTE_NAME,
+});
+
+export const initRouteNameSuccess = routes => ({
+  type: INIT_ROUTE_NAME_SUCCESS,
+  routes,
+});
+
+export const initRouteNameFailed = error => ({
+  type: INIT_ROUTE_NAME_FAILED,
+  error,
 });

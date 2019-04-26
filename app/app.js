@@ -32,6 +32,7 @@ import 'file-loader?name=.htaccess!./.htaccess';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+import { initRouteName } from 'containers/Auth/actions';
 import configureStore from './configureStore';
 
 // Import i18n messages
@@ -48,6 +49,10 @@ axios.defaults.headers.common.Authorization = Cookies.get('token')
   ? Cookies.get('token').replace('%20', ' ')
   : '';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+if (Cookies.get('token')) {
+  store.dispatch(initRouteName());
+}
 
 const render = messages => {
   ReactDOM.render(

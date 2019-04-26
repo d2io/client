@@ -19,4 +19,10 @@ const makeSelectError = () =>
     substate => substate.error,
   );
 
-export { makeSelectUser, makeSelectError };
+const makeSelectRoutes = () =>
+  createSelector(
+    selectAuthDomain,
+    substate => substate.routes,
+  );
+
+export { makeSelectUser, makeSelectError, makeSelectRoutes };

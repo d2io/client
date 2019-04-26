@@ -5,12 +5,18 @@
  */
 import produce from 'immer';
 import isEmpty from 'utils/checkEmpty';
-import { SET_CURRENT_USER, SIGNIN_FAILURE, SIGNOUT_SUCCESS } from './constants';
+import {
+  INIT_ROUTE_NAME_SUCCESS,
+  SET_CURRENT_USER,
+  SIGNIN_FAILURE,
+  SIGNOUT_SUCCESS,
+} from './constants';
 
 export const initialState = {
   isAuthorized: false,
   user: {},
   error: {},
+  routes: [],
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -27,6 +33,9 @@ const authReducer = (state = initialState, action) =>
       case SIGNOUT_SUCCESS:
         draft.isAuthorized = false;
         draft.user = {};
+        break;
+      case INIT_ROUTE_NAME_SUCCESS:
+        draft.routes = action.routes;
         break;
     }
   });

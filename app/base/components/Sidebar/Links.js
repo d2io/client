@@ -4,7 +4,7 @@
  *
  */
 
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { NavLink, withRouter } from 'react-router-dom';
@@ -12,87 +12,119 @@ import ListItem from '@material-ui/core/ListItem';
 import Icon from '@material-ui/core/Icon';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import Collapse from '@material-ui/core/Collapse';
 import { BLUE } from 'config/constants';
-import { Dashboard, Person } from '@material-ui/icons';
 
-const routes = [
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    icon: Dashboard,
-  },
-  {
-    path: '/picture',
-    name: 'Picture',
-    icon: Person,
-  },
-];
+// const routes = [
+//   {
+//     path: '/dashboard',
+//     name: 'Dashboard',
+//   },
+//   {
+//     path: '/picture',
+//     name: 'Picture',
+//   },
+// ];
 
-class Links extends Component {
-  activeRoute = routeName =>
-    this.props.location && this.props.location.pathname.indexOf(routeName) > -1;
+const activeRoute = (routeName, location) =>
+  location && location.pathname.indexOf(routeName) > -1;
 
-  render() {
-    return (
-      <List className={this.props.classes.list}>
-        {this.props.routes.map((prop, key) => {
+const Links = props => {
+  // props.initRouteName();
+  const [routes, setRoutes] = useState(props.routes);
+  const [open, setOpenState] = useState(false);
+
+  useEffect(() => {
+    if (props.routes !== routes) {
+      setRoutes(props.routes);
+    }
+  });
+
+  return (
+    <List className={props.classes.list}>
+      {routes
+        .filter(route => !route.parent)
+        .map(route => {
           const listItemClasses = classNames({
-            [` ${this.props.classes[BLUE]}`]: this.activeRoute(prop.path),
+            [` ${props.classes[BLUE]}`]: activeRoute(
+              route.link,
+              props.location,
+            ),
           });
 
           const whiteFontClasses = classNames({
-            [` ${this.props.classes.whiteFont}`]: this.activeRoute(prop.path),
+            [` ${props.classes.whiteFont}`]: activeRoute(
+              route.link,
+              props.location,
+            ),
           });
 
           return (
-            <NavLink
-              to={prop.path}
-              className={this.props.classes.item}
-              activeClassName="active"
-              key={key}
-            >
-              <ListItem
-                button
-                className={this.props.classes.itemLink + listItemClasses}
+            <div>
+              <NavLink
+                to={route.link || '/#'}
+                className={props.classes.item}
+                activeClassName="active"
+                key={route.id}
               >
-                {typeof prop.icon === 'string' ? (
-                  <Icon
+                <ListItem
+                  button
+                  className={props.classes.itemLink + listItemClasses}
+                >
+                  {/* {typeof route.icon === 'string' ? ( */}
+                  {/*  <Icon */}
+                  {/*    className={classNames( */}
+                  {/*      props.classes.itemIcon, */}
+                  {/*      whiteFontClasses, */}
+                  {/*    )} */}
+                  {/*  > */}
+                  {/*    {route.icon} */}
+                  {/*  </Icon> */}
+                  {/* ) : ( */}
+                  {/*  <route.icon */}
+                  {/*    className={classNames( */}
+                  {/*      props.classes.itemIcon, */}
+                  {/*      whiteFontClasses, */}
+                  {/*    )} */}
+                  {/*  /> */}
+                  {/* )} */}
+                  <ListItemText
+                    primary={route.name}
                     className={classNames(
-                      this.props.classes.itemIcon,
+                      props.classes.itemText,
                       whiteFontClasses,
                     )}
-                  >
-                    {prop.icon}
-                  </Icon>
-                ) : (
-                  <prop.icon
-                    className={classNames(
-                      this.props.classes.itemIcon,
-                      whiteFontClasses,
-                    )}
+                    disableTypography
                   />
-                )}
-                <ListItemText
-                  primary={prop.name}
-                  className={classNames(
-                    this.props.classes.itemText,
-                    whiteFontClasses,
-                  )}
-                  disableTypography
-                />
-              </ListItem>
-            </NavLink>
+                  {open ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
+              </NavLink>
+
+              <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {routes
+                    .filter(child => child.parent === route.id)
+                    .map(child => (
+                      <ListItem button>
+                        <ListItemText inset primary={child.name} />
+                      </ListItem>
+                    ))}
+                </List>
+              </Collapse>
+            </div>
           );
         })}
-      </List>
-    );
-  }
-}
+    </List>
+  );
+};
 
 Links.propTypes = {
   classes: PropTypes.object.isRequired,
+  initRouteName: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
-  routes: PropTypes.object.isRequired,
+  routes: PropTypes.array.isRequired,
 };
 
 export default withRouter(Links);
