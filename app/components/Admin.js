@@ -21,7 +21,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Navbar from 'base/components/Navbar/Navbar';
 import Footer from 'base/components/Footer';
 
-import PrivateRoute from './PrivateRoute';
+import { switchRoutes } from './commons/switchRoutes';
 
 class Routes extends Component {
   constructor(props) {
@@ -83,26 +83,14 @@ class Routes extends Component {
             {...rest}
           />
 
-          <Switch>
-            <PrivateRoute exact path="/" component={pages.dashboard} />
-            <PrivateRoute path="/dashboard" component={pages.dashboard} />
-            <PrivateRoute path="/picture" component={pages.picture} />
-            <PrivateRoute
-              exact
-              path="/picture-type"
-              component={pages.pictureType}
-            />
-            <PrivateRoute
-              exact
-              path="/picture-type/detail"
-              component={pages.pictureTypeDetail}
-            />
-            <PrivateRoute
-              exact
-              path="/picture-type/update"
-              component={pages.pictureTypeAddOrUpdatePage}
-            />
-          </Switch>
+          {this.getRoute() ? (
+            <div className={classes.content}>
+              <div className={classes.container}>{switchRoutes}</div>
+            </div>
+          ) : (
+            <div className={classes.map}>{switchRoutes}</div>
+          )}
+          {this.getRoute() ? <Footer /> : null}
         </div>
       </div>
     );

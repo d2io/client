@@ -13,8 +13,6 @@ import pages from 'components/pages';
 import Routes from '../../components/commons/Routes';
 import Login from '../Auth/LoginContainer';
 
-import GlobalStyle from '../../global-styles';
-
 export default function App() {
   return (
     <div>
@@ -24,7 +22,6 @@ export default function App() {
         <Route component={Routes} />
         <Route render={() => <Redirect path="/404" />} />
       </Switch>
-      <GlobalStyle />
     </div>
   );
 }

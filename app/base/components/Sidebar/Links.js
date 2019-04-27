@@ -10,6 +10,8 @@ import classNames from 'classnames';
 import { NavLink, withRouter } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import Icon from '@material-ui/core/Icon';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import DraftsIcon from '@material-ui/icons/Drafts';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -17,105 +19,101 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import { BLUE } from 'config/constants';
 
-// const routes = [
-//   {
-//     path: '/dashboard',
-//     name: 'Dashboard',
-//   },
-//   {
-//     path: '/picture',
-//     name: 'Picture',
-//   },
-// ];
-
-const activeRoute = (routeName, location) =>
-  location && location.pathname.indexOf(routeName) > -1;
-
 const Links = props => {
   // props.initRouteName();
   const [routes, setRoutes] = useState(props.routes);
-  const [open, setOpenState] = useState(false);
+  const [open, setOpenState] = useState([]);
+  const [itemActive, setItemActive] = useState(null);
 
   useEffect(() => {
     if (props.routes !== routes) {
       setRoutes(props.routes);
+    } else if (open.length === 0) {
+      const openState = routes.filter(route => !route.parent).map(_ => false);
+      setOpenState(openState);
     }
   });
 
   return (
-    <List className={props.classes.list}>
+    <List className={props.classes.list} component="nav">
       {routes
         .filter(route => !route.parent)
-        .map(route => {
-          const listItemClasses = classNames({
-            [` ${props.classes[BLUE]}`]: activeRoute(
-              route.link,
-              props.location,
-            ),
-          });
-
-          const whiteFontClasses = classNames({
-            [` ${props.classes.whiteFont}`]: activeRoute(
-              route.link,
-              props.location,
-            ),
-          });
-
-          return (
+        .map((route, index) =>
+          !route.parent && !route.hasChild ? (
+            <NavLink
+              to={route.link || '/#'}
+              className={props.classes.item}
+              activeClassName="active"
+              key={route.id}
+            >
+              <ListItem
+                button
+                className={classNames({
+                  [` ${props.classes[BLUE]}`]: route.id === itemActive,
+                })}
+                onClick={() => setItemActive(route.id)}
+              >
+                <ListItemText
+                  primary={route.name}
+                  className={classNames(props.classes.itemText)}
+                  disableTypography
+                />
+              </ListItem>
+            </NavLink>
+          ) : (
             <div>
-              <NavLink
-                to={route.link || '/#'}
-                className={props.classes.item}
-                activeClassName="active"
+              <ListItem
+                button
+                onClick={() =>
+                  setOpenState(open.map((_, i) => (i === index ? !_ : false)))
+                }
                 key={route.id}
               >
-                <ListItem
-                  button
-                  className={props.classes.itemLink + listItemClasses}
-                >
-                  {/* {typeof route.icon === 'string' ? ( */}
-                  {/*  <Icon */}
-                  {/*    className={classNames( */}
-                  {/*      props.classes.itemIcon, */}
-                  {/*      whiteFontClasses, */}
-                  {/*    )} */}
-                  {/*  > */}
-                  {/*    {route.icon} */}
-                  {/*  </Icon> */}
-                  {/* ) : ( */}
-                  {/*  <route.icon */}
-                  {/*    className={classNames( */}
-                  {/*      props.classes.itemIcon, */}
-                  {/*      whiteFontClasses, */}
-                  {/*    )} */}
-                  {/*  /> */}
-                  {/* )} */}
-                  <ListItemText
-                    primary={route.name}
-                    className={classNames(
-                      props.classes.itemText,
-                      whiteFontClasses,
-                    )}
-                    disableTypography
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-              </NavLink>
+                <ListItemText
+                  primary={route.name}
+                  className={classNames(props.classes.itemText)}
+                  disableTypography
+                />
+                {open[index] ? (
+                  <ExpandLess style={{ color: 'white' }} />
+                ) : (
+                  <ExpandMore style={{ color: 'white' }} />
+                )}
+              </ListItem>
 
-              <Collapse in={open} timeout="auto" unmountOnExit>
+              <Collapse in={open[index]} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   {routes
                     .filter(child => child.parent === route.id)
                     .map(child => (
-                      <ListItem button>
-                        <ListItemText inset primary={child.name} />
-                      </ListItem>
+                      <NavLink
+                        to={child.link || '/#'}
+                        className={props.classes.item}
+                        style={{ marginLeft: 20 }}
+                        activeClassName="active"
+                        key={child.id}
+                      >
+                        <ListItem
+                          button
+                          className={classNames({
+                            [` ${props.classes[BLUE]}`]:
+                              child.id === itemActive,
+                          })}
+                          onClick={() => setItemActive(child.id)}
+                        >
+                          <ListItemText
+                            primary={child.name}
+                            className={classNames(props.classes.itemText)}
+                            disableTypography
+                          />
+                        </ListItem>
+                      </NavLink>
                     ))}
                 </List>
               </Collapse>
             </div>
-          );
-        })}
+          ),
+        )}
     </List>
   );
 };

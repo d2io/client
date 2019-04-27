@@ -13,8 +13,8 @@ import Hidden from '@material-ui/core/Hidden';
 import Menu from '@material-ui/icons/Menu';
 
 // core components
-import Button from 'components/custom/Button/CustomButton';
-import headerStyle from 'assets/styles/material-dashboard-react/components/header';
+import Button from 'base/components/Button';
+import headerStyle from 'base/styles/components/header';
 import AdminNavbarLinks from './AdminNavbarLinks';
 
 function Header({ ...props }) {
@@ -42,7 +42,7 @@ function Header({ ...props }) {
           </Button>
         </div>
         <Hidden smDown implementation="css">
-          {props.rtlActive ? <RTLNavbarLinks /> : <AdminNavbarLinks />}
+          <AdminNavbarLinks />
         </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton

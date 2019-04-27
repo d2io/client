@@ -13,17 +13,6 @@ import image from 'assets/img/sidebar.jpg';
 import Links from './LinksContainer';
 import Brand from './Brand';
 
-// const routes = [
-//   {
-//     path: '/dashboard',
-//     name: 'Dashboard',
-//   },
-//   {
-//     path: '/picture',
-//     name: 'Picture',
-//   },
-// ];
-
 const Sidebar = ({ ...props }) => {
   const { classes } = props;
 
