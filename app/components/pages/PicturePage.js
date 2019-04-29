@@ -5,20 +5,18 @@
  */
 
 import React, { memo } from 'react';
-// import PropTypes from 'prop-types';
-// import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { FormattedMessage } from 'react-intl';
 import messages from 'components/messages';
 
-function LoginPage() {
-  return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
-  );
-}
+const PicturePage = () => (
+  <div>
+    Picture Page
+    <FormattedMessage {...messages.header} />
+  </div>
+);
 
-LoginPage.propTypes = {};
+PicturePage.propTypes = {};
 
-export default memo(LoginPage);
+export default memo(PicturePage);

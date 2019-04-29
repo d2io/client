@@ -25,4 +25,15 @@ const makeSelectRoutes = () =>
     substate => substate.routes,
   );
 
-export { makeSelectUser, makeSelectError, makeSelectRoutes };
+const makeSelectCheckAuthorized = () =>
+  createSelector(
+    selectAuthDomain,
+    substate => substate.isAuthorized,
+  );
+
+export {
+  makeSelectUser,
+  makeSelectError,
+  makeSelectRoutes,
+  makeSelectCheckAuthorized,
+};

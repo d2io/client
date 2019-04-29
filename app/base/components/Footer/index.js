@@ -7,7 +7,7 @@ import List from '@material-ui/core/List/index';
 // core components
 import footerStyle from '../../styles/components/footer';
 
-function Index({ ...props }) {
+const Index = ({ ...props }) => {
   const { classes } = props;
   return (
     <footer className={classes.footer}>
@@ -39,16 +39,15 @@ function Index({ ...props }) {
         <p className={classes.right}>
           <span>
             &copy; {1900 + new Date().getYear()}{' '}
-            <a href="https://www.creative-tim.com" className={classes.a}>
-              Creative Tim
+            <a href="https://www.facebook.com/0x80h" className={classes.a}>
+              Duong Han
             </a>
-            , made with love for a better web
           </span>
         </p>
       </div>
     </footer>
   );
-}
+};
 
 Index.propTypes = {
   classes: PropTypes.object.isRequired,

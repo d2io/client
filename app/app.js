@@ -18,6 +18,9 @@ import history from 'utils/history';
 // Import root app
 import App from 'containers/App';
 
+// Import decode token package
+import jwtDecode from 'jwt-decode';
+
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
@@ -31,7 +34,7 @@ import 'file-loader?name=.htaccess!./.htaccess';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-import { initRouteName } from 'containers/Auth/actions';
+import { initRouteName, setCurrentUser } from 'containers/Auth/actions';
 import configureStore from './configureStore';
 
 // Import i18n messages
@@ -49,7 +52,15 @@ axios.defaults.headers.common.Authorization = Cookies.get('token')
   : '';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
+// Detect user when re-open webpage
 if (Cookies.get('token')) {
+  // decode token and set current user
+  const userInfo = jwtDecode(Cookies.get('token'));
+  debugger;
+
+  // set user and isAuthenticated
+  store.dispatch(setCurrentUser(userInfo));
+
   store.dispatch(initRouteName());
 }
 

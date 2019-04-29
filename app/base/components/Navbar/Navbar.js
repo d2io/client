@@ -18,32 +18,25 @@ import headerStyle from 'base/styles/components/header';
 import AdminNavbarLinks from './AdminNavbarLinks';
 
 function Header({ ...props }) {
-  function makeBrand() {
+  const makeBrand = () => {
     let name;
     props.routes.map((prop, key) => {
-      if (prop.layout + prop.path === props.location.pathname) {
-        name = props.rtlActive ? prop.rtlName : prop.name;
-      }
+      if (prop.path === props.location.pathname) {
+        name = { prop };
+      } else name = 'Admin';
       return null;
     });
     return name;
-  }
+  };
+
   const { classes, color } = props;
   const appBarClasses = classNames({
     [` ${classes[color]}`]: color,
   });
+
   return (
     <AppBar className={classes.appBar + appBarClasses}>
       <Toolbar className={classes.container}>
-        <div className={classes.flex}>
-          {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
-            {makeBrand()}
-          </Button>
-        </div>
-        <Hidden smDown implementation="css">
-          <AdminNavbarLinks />
-        </Hidden>
         <Hidden mdUp implementation="css">
           <IconButton
             color="inherit"
@@ -52,6 +45,15 @@ function Header({ ...props }) {
           >
             <Menu />
           </IconButton>
+        </Hidden>
+        <div className={classes.flex}>
+          {/* Here we create navbar brand, based on route name */}
+          <Button color="transparent" href="#" className={classes.title}>
+            {makeBrand()}
+          </Button>
+        </div>
+        <Hidden smDown implementation="css">
+          <AdminNavbarLinks />
         </Hidden>
       </Toolbar>
     </AppBar>

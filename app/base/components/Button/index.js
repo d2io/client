@@ -25,6 +25,7 @@ function RegularButton({ ...props }) {
     muiClasses,
     ...rest
   } = props;
+
   const btnClasses = classNames({
     [classes.button]: true,
     [classes[size]]: size,
@@ -37,6 +38,7 @@ function RegularButton({ ...props }) {
     [classes.justIcon]: justIcon,
     [className]: className,
   });
+
   return (
     <Button {...rest} classes={muiClasses} className={btnClasses}>
       {children}
@@ -46,6 +48,7 @@ function RegularButton({ ...props }) {
 
 RegularButton.propTypes = {
   classes: PropTypes.object.isRequired,
+  children: PropTypes.any.isRequired,
   color: PropTypes.oneOf([
     'primary',
     'info',

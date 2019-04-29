@@ -13,6 +13,7 @@ export const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
 // Sign Out
 export const SIGNOUT_REQUEST = 'SIGNOUT_REQUEST';
 export const SIGNOUT_SUCCESS = 'SIGNOUT_SUCCESS';
+export const SIGNOUT_FAILED = 'SIGNOUT_FAILED';
 
 // Init Route
 export const INIT_ROUTE_NAME = 'INIT_ROUTE_NAME';

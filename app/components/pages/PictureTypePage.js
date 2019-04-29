@@ -14,6 +14,7 @@ import messages from 'components/messages';
 function LoginPage() {
   return (
     <div>
+      Picture Type Page
       <FormattedMessage {...messages.header} />
     </div>
   );

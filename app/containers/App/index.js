@@ -10,8 +10,10 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import pages from 'components/pages';
-import Routes from '../../components/commons/Routes';
+import Admin from '../../components/Admin';
 import Login from '../Auth/LoginContainer';
+
+import 'assets/css/index.css?v=1.6.0';
 
 export default function App() {
   return (
@@ -19,7 +21,7 @@ export default function App() {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/404" component={pages.notfound} />
-        <Route component={Routes} />
+        <Route component={Admin} />
         <Route render={() => <Redirect path="/404" />} />
       </Switch>
     </div>

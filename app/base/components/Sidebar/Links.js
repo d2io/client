@@ -11,7 +11,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import Icon from '@material-ui/core/Icon';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import DraftsIcon from '@material-ui/icons/Drafts';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -53,6 +52,11 @@ const Links = props => {
                 })}
                 onClick={() => setItemActive(route.id)}
               >
+                <ListItemIcon>
+                  <Icon className={classNames(props.classes.itemIcon)}>
+                    {route.classAttribute}
+                  </Icon>
+                </ListItemIcon>
                 <ListItemText
                   primary={route.name}
                   className={classNames(props.classes.itemText)}
@@ -61,14 +65,16 @@ const Links = props => {
               </ListItem>
             </NavLink>
           ) : (
-            <div>
+            <div key={route.id}>
               <ListItem
                 button
                 onClick={() =>
                   setOpenState(open.map((_, i) => (i === index ? !_ : false)))
                 }
-                key={route.id}
               >
+                <Icon className={classNames(props.classes.itemIcon)}>
+                  {route.classAttribute}
+                </Icon>
                 <ListItemText
                   primary={route.name}
                   className={classNames(props.classes.itemText)}

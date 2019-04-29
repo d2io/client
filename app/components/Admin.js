@@ -4,9 +4,8 @@
  *
  */
 
-import React, { useState, Component } from 'react';
-import { Switch } from 'react-router-dom';
-import pages from 'components/pages';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Sidebar from 'base/components/Sidebar';
 import dashboardStyle from 'base/styles/layouts/dashboard';
 
@@ -22,8 +21,9 @@ import Navbar from 'base/components/Navbar/Navbar';
 import Footer from 'base/components/Footer';
 
 import { switchRoutes } from './commons/switchRoutes';
+import { dashboardRoutes } from './commons/data';
 
-class Routes extends Component {
+class Admin extends Component {
   constructor(props) {
     super(props);
 
@@ -76,9 +76,10 @@ class Routes extends Component {
           open={this.state.mobileOpen}
           {...this.props}
         />
+
         <div className={classes.mainPanel} ref="mainPanel">
           <Navbar
-            routes={routes}
+            routes={dashboardRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
@@ -90,11 +91,16 @@ class Routes extends Component {
           ) : (
             <div className={classes.map}>{switchRoutes}</div>
           )}
-          {this.getRoute() ? <Footer /> : null}
+          {this.getRoute() && <Footer />}
         </div>
       </div>
     );
   }
 }
 
-export default withStyles(dashboardStyle)(Routes);
+Admin.propTypes = {
+  location: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(dashboardStyle)(Admin);

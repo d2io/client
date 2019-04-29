@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 // @material-ui/core components
@@ -21,7 +21,6 @@ const Sidebar = ({ ...props }) => {
       <Hidden mdUp implementation="css">
         <Drawer
           variant="temporary"
-          anchor="left"
           open={props.open}
           classes={{
             paper: classNames(classes.drawerPaper),
@@ -33,7 +32,6 @@ const Sidebar = ({ ...props }) => {
         >
           <Brand classes={classes} />
           <div className={classes.sidebarWrapper}>
-            <AdminNavbarLinks />
             <Links classes={classes} />
           </div>
           {image !== undefined && (
@@ -44,12 +42,11 @@ const Sidebar = ({ ...props }) => {
           )}
         </Drawer>
       </Hidden>
-
       <Hidden smDown implementation="css">
         <Drawer
           anchor="left"
           variant="permanent"
-          open
+          open={props.open}
           classes={{
             paper: classNames(classes.drawerPaper),
           }}
@@ -58,12 +55,12 @@ const Sidebar = ({ ...props }) => {
           <div className={classes.sidebarWrapper}>
             <Links classes={classes} />
           </div>
-          {image !== undefined ? (
+          {image !== undefined && (
             <div
               className={classes.background}
               style={{ backgroundImage: `url(${image})` }}
             />
-          ) : null}
+          )}
         </Drawer>
       </Hidden>
     </div>

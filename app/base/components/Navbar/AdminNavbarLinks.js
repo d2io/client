@@ -1,10 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import MenuItem from '@material-ui/core/MenuItem';
-import MenuList from '@material-ui/core/MenuList';
 import Grow from '@material-ui/core/Grow';
 import Paper from '@material-ui/core/Paper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -14,7 +13,6 @@ import Poppers from '@material-ui/core/Popper';
 // @material-ui/icons
 import Person from '@material-ui/icons/Person';
 import Notifications from '@material-ui/icons/Notifications';
-import Dashboard from '@material-ui/icons/Dashboard';
 import Search from '@material-ui/icons/Search';
 
 // core components
@@ -22,27 +20,44 @@ import CustomInput from 'base/components/Input';
 import Button from 'base/components/Button';
 
 import headerLinksStyle from 'base/styles/components/headerLinks';
+import AdminMenuList from './AdminMenuList';
 
 class HeaderLinks extends React.Component {
   state = {
     open: false,
+    anchorEl: null,
+    entries: [],
+    type: '',
   };
 
   handleToggle = () => {
     this.setState(state => ({ open: !state.open }));
   };
 
-  handleClose = event => {
-    if (this.anchorEl.contains(event.target)) {
-      return;
-    }
+  handleClick = type => event => {
+    const { currentTarget } = event;
+    const entries =
+      type === 'logout'
+        ? ['Thông tin', 'Đăng xuất']
+        : ['this is example notification row'];
 
-    this.setState({ open: false });
+    this.setState(state => ({
+      anchorEl: currentTarget,
+      open: !state.open,
+      entries,
+      type,
+    }));
+  };
+
+  handleClickMenuEntry = entry => event => {
+    // TODO: handle invidual cases
+    if (this.state.type === 'logout' && entry === 1) alert('Đăng xuất');
   };
 
   render() {
     const { classes } = this.props;
     const { open } = this.state;
+
     return (
       <div>
         <div className={classes.searchWrapper}>
@@ -61,42 +76,22 @@ class HeaderLinks extends React.Component {
             <Search />
           </Button>
         </div>
-        <Button
-          color={window.innerWidth > 959 ? 'transparent' : 'white'}
-          justIcon={window.innerWidth > 959}
-          simple={!(window.innerWidth > 959)}
-          aria-label="Dashboard"
-          className={classes.buttonLink}
-        >
-          <Dashboard className={classes.icons} />
-          <Hidden mdUp implementation="css">
-            <p className={classes.linkText}>Dashboard</p>
-          </Hidden>
-        </Button>
         <div className={classes.manager}>
           <Button
-            buttonRef={node => {
-              this.anchorEl = node;
-            }}
             color={window.innerWidth > 959 ? 'transparent' : 'white'}
             justIcon={window.innerWidth > 959}
             simple={!(window.innerWidth > 959)}
             aria-owns={open ? 'menu-list-grow' : null}
             aria-haspopup
-            onClick={this.handleToggle}
+            onClick={this.handleClick('notification')}
             className={classes.buttonLink}
           >
             <Notifications className={classes.icons} />
             <span className={classes.notifications}>5</span>
-            <Hidden mdUp implementation="css">
-              <p onClick={this.handleClick} className={classes.linkText}>
-                Notification
-              </p>
-            </Hidden>
           </Button>
           <Poppers
             open={open}
-            anchorEl={this.anchorEl}
+            anchorEl={this.state.anchorEl}
             transition
             disablePortal
             className={`${classNames({ [classes.popperClose]: !open })} ${
@@ -108,44 +103,16 @@ class HeaderLinks extends React.Component {
                 {...TransitionProps}
                 id="menu-list-grow"
                 style={{
-                  transformOrigin:
-                    placement === 'bottom' ? 'center top' : 'center bottom',
+                  transformOrigin: placement,
                 }}
               >
                 <Paper>
                   <ClickAwayListener onClickAway={this.handleClose}>
-                    <MenuList role="menu">
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
-                        Mike John responded to your email
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
-                        You have 5 new tasks
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
-                        You're now friend with Andrew
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
-                        Another Notification
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={classes.dropdownItem}
-                      >
-                        Another One
-                      </MenuItem>
-                    </MenuList>
+                    <AdminMenuList
+                      classes={classes}
+                      handleClickMenuEntry={this.handleClickMenuEntry}
+                      entries={this.state.entries}
+                    />
                   </ClickAwayListener>
                 </Paper>
               </Grow>
@@ -156,6 +123,7 @@ class HeaderLinks extends React.Component {
           color={window.innerWidth > 959 ? 'transparent' : 'white'}
           justIcon={window.innerWidth > 959}
           simple={!(window.innerWidth > 959)}
+          onClick={this.handleClick('logout')}
           aria-label="Person"
           className={classes.buttonLink}
         >
@@ -168,5 +136,9 @@ class HeaderLinks extends React.Component {
     );
   }
 }
+
+HeaderLinks.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(headerLinksStyle)(HeaderLinks);
