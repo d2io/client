@@ -3,22 +3,25 @@
  * Created: 4/24/19
  *
  */
+import { memo } from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
-import { Helmet } from 'react-helmet';
+import {
+  makeSelectPictureTypeList,
+  makeSelectPictureTypeError,
+} from 'containers/Picture/selectors';
+import PicturePage from './PicturePage';
 
-import { FormattedMessage } from 'react-intl';
-import messages from 'components/messages';
+const mapStateToProps = createStructuredSelector({
+  picTypeList: makeSelectPictureTypeList(),
+  error: makeSelectPictureTypeError(),
+});
 
-const PicturePage = () => (
-  <div>
-    <Helmet defaultTitle="Picture Page" />
-    Picture Page
-    <FormattedMessage {...messages.header} />
-  </div>
-);
+const withConnect = connect(mapStateToProps);
 
-PicturePage.propTypes = {};
-
-export default memo(PicturePage);
+export default compose(
+  withConnect,
+  memo,
+)(PicturePage);

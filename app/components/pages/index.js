@@ -5,8 +5,8 @@
  */
 
 import DashboardPage from './DashboardPage';
-import PicturePage from './picture/PicturePage';
-import PictureTypePage from './picture-type/PictureTypeContainer';
+import PicturePage from './picture';
+import PictureTypePage from './picture-type';
 import PictureTypeDetailPage from './PictureTypeDetailPage';
 import PictureTypeAddOrUpdatePage from './PictureTypeAddOrUpdatePage';
 import LoginPage from './LoginPage';

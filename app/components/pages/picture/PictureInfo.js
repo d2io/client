@@ -9,6 +9,8 @@ import Card from 'base/components/Card/Card';
 import Button from 'base/components/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Grid from '@material-ui/core/Grid';
+import GridItem from 'base/components/Grid/GridItem';
+import GridContainer from 'base/components/Grid/GridContainer';
 import { FormattedMessage } from 'react-intl';
 import Input from 'base/components/Input';
 import messages from '../../messages';
@@ -17,6 +19,7 @@ class PictureInfo extends React.Component {
   constructor(props) {
     super(props);
 
+    debugger;
     this.state = {
       title: this.props.title || '',
       alt: this.props.alt || '',
@@ -30,7 +33,7 @@ class PictureInfo extends React.Component {
       [e.target.name]: e.target.value,
     });
 
-    this.props.updateImageInfo(this.props.reducers, {
+    this.props.updateImageInfo(this.props.index, {
       ...this.state,
       [e.target.name]: e.target.value,
     });
@@ -38,81 +41,87 @@ class PictureInfo extends React.Component {
 
   render() {
     return (
-      <Card style={{ flexGrow: 1 }}>
-        <Grid container spacing={24}>
-          <Grid item xs={4}>
+      <Card style={{ flexGrow: 1, padding: 20 }}>
+        <GridContainer>
+          <GridItem xs={4} sm={4} md={4}>
             <img
               src={this.props.imgSrc || 'https://i.imgur.com/Fu5Ffo4.jpg'}
               alt={this.state.alt}
               height={200}
             />
-          </Grid>
+          </GridItem>
 
-          <Grid item xs={8}>
-            <div>
-              <Input
-                labelText="Tiêu đề"
-                name="title"
-                value={this.state.title}
-                onChange={this.handleChange}
-                icon="pencil-alt"
-                group
-                type="text"
-                validate
-                error="wrong"
-                success="right"
-              />
-              <Input
-                labelText="Alt"
-                name="alt"
-                value={this.state.alt}
-                onChange={this.handleChange}
-                icon="puzzle-piece"
-                group
-                type="text"
-                validate
-                error="wrong"
-                success="right"
-              />
-              <Input
-                labelText="Đường dẫn"
-                name="link"
-                value={this.state.link}
-                onChange={this.handleChange}
-                icon="link"
-                group
-                type="email"
-                validate
-                error="wrong"
-                success="right"
-              />
-              <Input
-                labelText="Thông tin"
-                name="summary"
-                value={this.state.summary}
-                onChange={this.handleChange}
-                icon="info-circle"
-                group
-                type="text"
-                validate
-                error="wrong"
-                success="right"
-              />
-            </div>
-          </Grid>
-        </Grid>
+          <GridItem xs={8} sm={8} md={8}>
+            <Input
+              labelText="Tiêu đề"
+              name="title"
+              inputProps={{
+                value: this.state.title,
+              }}
+              onChange={this.handleChange}
+              id="title"
+              formControlProps={{
+                fullWidth: true,
+                icon: 'pencil-alt',
+                type: 'text',
+              }}
+            />
+            <Input
+              labelText="Alt"
+              name="alt"
+              inputProps={{
+                value: this.state.alt,
+                icon: 'puzzle-piece',
+                type: 'text',
+              }}
+              onChange={this.handleChange}
+              id="alt"
+              formControlProps={{
+                fullWidth: true,
+              }}
+            />
+            <Input
+              labelText="Đường dẫn"
+              name="link"
+              inputProps={{
+                value: this.state.link,
+                icon: 'link',
+                type: 'email',
+              }}
+              onChange={this.handleChange}
+              id="link"
+              formControlProps={{
+                fullWidth: true,
+              }}
+            />
+            <Input
+              labelText="Thông tin"
+              name="summary"
+              inputProps={{
+                value: this.state.summary,
+                icon: 'info-circle',
+                type: 'text',
+              }}
+              onChange={this.handleChange}
+              id="summary"
+              formControlProps={{
+                fullWidth: true,
+              }}
+            />
+          </GridItem>
+        </GridContainer>
 
-        <Grid container spacing={24}>
+        <GridContainer direction="row" justify="center" alignItems="center">
           <Grid item xs={4}>
             <Button
               variant="contained"
               color="danger"
-              onClick={() => this.props.onRemove(this.props.reducers)}
+              onClick={() => this.props.onRemove(this.props.index)}
             >
               <FormattedMessage {...messages.delete} /> <DeleteIcon />
             </Button>
           </Grid>
-        </Grid>
+        </GridContainer>
       </Card>
     );
   }
@@ -123,7 +132,7 @@ PictureInfo.propTypes = {
   imgSrc: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   onRemove: PropTypes.func,
-  reducers: PropTypes.object,
+  index: PropTypes.number,
   summary: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   updateImageInfo: PropTypes.func,
