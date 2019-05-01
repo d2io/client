@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -12,7 +13,7 @@ import Check from '@material-ui/icons/Check';
 // core components
 import customInputStyle from '../../styles/components/customInput';
 
-function Index({ ...props }) {
+function CustomInput({ ...props }) {
   const {
     classes,
     formControlProps,
@@ -68,7 +69,7 @@ function Index({ ...props }) {
   );
 }
 
-Index.propTypes = {
+CustomInput.propTypes = {
   classes: PropTypes.object.isRequired,
   labelText: PropTypes.node,
   labelProps: PropTypes.object,
@@ -79,4 +80,4 @@ Index.propTypes = {
   success: PropTypes.bool,
 };
 
-export default withStyles(customInputStyle)(Index);
+export default withStyles(customInputStyle)(CustomInput);

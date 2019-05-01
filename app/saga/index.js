@@ -6,9 +6,10 @@
 
 import { all, call } from 'redux-saga/effects';
 import authSaga from 'containers/Auth/saga';
+import pictureSaga from 'containers/Picture/saga';
 
 const getRouterSaga = function* rootSaga() {
-  yield all([call(authSaga)]);
+  yield all([call(authSaga), call(pictureSaga)]);
 };
 
 export default getRouterSaga;

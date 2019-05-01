@@ -56,7 +56,6 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 if (Cookies.get('token')) {
   // decode token and set current user
   const userInfo = jwtDecode(Cookies.get('token'));
-  debugger;
 
   // set user and isAuthenticated
   store.dispatch(setCurrentUser(userInfo));

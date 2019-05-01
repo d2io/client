@@ -4,21 +4,10 @@
  *
  */
 
-import React, { memo } from 'react';
+import { memo } from 'react';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
-import { FormattedMessage } from 'react-intl';
-import messages from 'components/messages';
+import Detail from './picture-type/Detail';
 
-function LoginPage() {
-  return (
-    <div>
-      <FormattedMessage {...messages.header} />
-    </div>
-  );
-}
-
-LoginPage.propTypes = {};
-
-export default memo(LoginPage);
+export default memo(Detail);
