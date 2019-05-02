@@ -1,0 +1,10 @@
+/*
+ *
+ * Article constants
+ *
+ */
+// Article Type
+export const ARTICLE_TYPE_REQUEST = 'ARTICLE_TYPE_REQUEST';
+export const FETCH_ARTICLE_TYPE_SUCCESS = 'FETCH_ARTICLE_TYPE_SUCCESS';
+export const FETCH_ARTICLE_TYPE_FAILED = 'FETCH_ARTICLE_TYPE_FAILED';
+export const SET_ARTICLE_TYPE_LIST = 'SET_ARTICLE_TYPE_LIST';
