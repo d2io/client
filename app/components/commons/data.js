@@ -37,6 +37,12 @@ const dashboardRoutes = [
     exact: true,
     component: pages.pictureTypeAddOrUpdatePage,
   },
+  {
+    path: '/article-type',
+    name: 'Article Type',
+    exact: true,
+    component: pages.articleType,
+  },
 ];
 
 export { dashboardRoutes };

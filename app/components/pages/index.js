@@ -11,6 +11,7 @@ import PictureTypeDetailPage from './PictureTypeDetailPage';
 import PictureTypeAddOrUpdatePage from './PictureTypeAddOrUpdatePage';
 import LoginPage from './LoginPage';
 import NotFoundPage from './NotFoundPage';
+import ArticleType from './article/ArticleType';
 
 const pages = {
   login: LoginPage,
@@ -19,6 +20,7 @@ const pages = {
   pictureType: PictureTypePage,
   pictureTypeDetail: PictureTypeDetailPage,
   pictureTypeAddOrUpdatePage: PictureTypeAddOrUpdatePage,
+  articleType: ArticleType,
   notfound: NotFoundPage,
 };
 
