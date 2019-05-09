@@ -7,7 +7,7 @@ const dataFields = {
       width: 150,
     },
     {
-      label: 'Tên loại hình ảnh',
+      label: 'Tên loại bài viết',
       field: 'name',
       sort: 'asc',
       width: 270,

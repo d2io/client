@@ -126,8 +126,6 @@ const Links = props => {
 
 Links.propTypes = {
   classes: PropTypes.object.isRequired,
-  initRouteName: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
   routes: PropTypes.array.isRequired,
 };
 

@@ -20,13 +20,14 @@ import AdminNavbarLinks from './AdminNavbarLinks';
 function Header({ ...props }) {
   const makeBrand = () => {
     let name;
-    props.routes.map((prop, key) => {
-      if (prop.path === props.location.pathname) {
-        name = { prop };
-      } else name = 'Admin';
-      return null;
+    props.routes.some(route => {
+      if (route.path === props.location.pathname) {
+        name = route.name;
+        return true;
+      }
+      return false;
     });
-    return name;
+    return name || 'Admin';
   };
 
   const { classes, color } = props;
@@ -48,7 +49,7 @@ function Header({ ...props }) {
         </Hidden>
         <div className={classes.flex}>
           {/* Here we create navbar brand, based on route name */}
-          <Button color="transparent" href="#" className={classes.title}>
+          <Button color="transparent" className={classes.title}>
             {makeBrand()}
           </Button>
         </div>

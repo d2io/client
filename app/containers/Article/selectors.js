@@ -7,16 +7,20 @@ import { initialState } from './reducer';
 
 const selectArticleDomain = state => state.article || initialState;
 
-/**
- * Other specific selectors
- */
+const makeSelectArticleTypeList = () =>
+  createSelector(
+    selectArticleDomain,
+    substate => substate.articleTypeList,
+  );
 
-/**
- * Default selector used by Article
- */
+const makeSelectArticleTypeError = () =>
+  createSelector(
+    selectArticleDomain,
+    substate => substate.error,
+  );
 
-const makeSelectArticle = () =>
-  createSelector(selectArticleDomain, substate => substate);
-
-export default makeSelectArticle;
-export { selectArticleDomain };
+export {
+  selectArticleDomain,
+  makeSelectArticleTypeList,
+  makeSelectArticleTypeError,
+};

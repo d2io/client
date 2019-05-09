@@ -24,7 +24,7 @@ import styles from 'components/styles/table';
 import dataFields from './fields';
 import ActionBtn from './ActionBtn';
 
-class PictureTypePage extends React.Component {
+class ArticleTypePage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -38,28 +38,28 @@ class PictureTypePage extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps) {
-    if (nextProps.picTypeList) {
+    if (nextProps.articleTypeList) {
       return {
         data: {
           ...dataFields,
-          rows: nextProps.picTypeList.map(pictureType => ({
-            id: pictureType.id,
-            name: pictureType.name,
-            number: pictureType.number,
+          rows: nextProps.articleTypeList.map(articleType => ({
+            id: articleType.id,
+            name: articleType.name,
+            number: articleType.number,
             status: (
               <Chip
                 color="primary"
                 icon={
-                  pictureType.isShow ? (
+                  articleType.isShow ? (
                     <VisibilityIcon fontSize="small" />
                   ) : (
                     <VisibilityOffIcon fontSize="small" />
                   )
                 }
-                label={pictureType.isShow ? ' Hiển thị' : ' Không hiển thị'}
+                label={articleType.isShow ? ' Hiển thị' : ' Không hiển thị'}
               />
             ),
-            action: <ActionBtn type={pictureType} />,
+            action: <ActionBtn type={articleType} />,
           })),
         },
       };
@@ -69,12 +69,13 @@ class PictureTypePage extends React.Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Kiểu hình ảnh</h4>
+              <h4 className={classes.cardTitleWhite}>Kiểu bài viết</h4>
               <p className={classes.cardCategoryWhite}>Mô tả</p>
             </CardHeader>
 
@@ -98,13 +99,10 @@ class PictureTypePage extends React.Component {
   }
 }
 
-PictureTypePage.propTypes = {
+ArticleTypePage.propTypes = {
   classes: PropTypes.object,
-  onFetchAllType: PropTypes.func,
+  onFetchAllType: PropTypes.func.isRequired,
+  articleTypeList: PropTypes.array.isRequired,
 };
 
-ActionBtn.propTypes = {
-  type: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(PictureTypePage);
+export default withStyles(styles)(ArticleTypePage);

@@ -4,10 +4,22 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import {
+  FETCH_ARTICLE_TYPE_FAILED,
+  FETCH_ARTICLE_TYPE_SUCCESS,
+  ARTICLE_TYPE_REQUEST,
+} from './constants';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+export const requestArticleType = () => ({
+  type: ARTICLE_TYPE_REQUEST,
+});
+
+export const fetchArticleTypeSuccess = articleTypes => ({
+  type: FETCH_ARTICLE_TYPE_SUCCESS,
+  articleTypes,
+});
+
+export const fetchArticleTypeFailed = error => ({
+  type: FETCH_ARTICLE_TYPE_FAILED,
+  error,
+});

@@ -9,6 +9,7 @@ import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import authReducer from 'containers/Auth/reducer';
 import pictureReducer from 'containers/Picture/reducer';
+import articleReducer from 'containers/Article/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -19,6 +20,7 @@ export default function createReducer(injectedReducers = {}) {
     router: connectRouter(history),
     auth: authReducer,
     picture: pictureReducer,
+    article: articleReducer,
     ...injectedReducers,
   });
 

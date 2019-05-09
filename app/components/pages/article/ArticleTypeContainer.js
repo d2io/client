@@ -8,21 +8,20 @@ import { memo } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
 import {
-  makeSelectPictureTypeList,
-  makeSelectPictureTypeError,
-} from 'containers/Picture/selectors';
-import { requestPictureType } from 'containers/Picture/actions';
+  makeSelectArticleTypeError,
+  makeSelectArticleTypeList,
+} from 'containers/Article/selectors';
+import { requestArticleType } from 'containers/Article/actions';
 import ArticleType from './ArticleType';
 
 const mapStateToProps = createStructuredSelector({
-  picTypeList: makeSelectPictureTypeList(),
-  error: makeSelectPictureTypeError(),
+  articleTypeList: makeSelectArticleTypeList(),
+  error: makeSelectArticleTypeError(),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFetchAllType: () => dispatch(requestPictureType()),
+  onFetchAllType: () => dispatch(requestArticleType()),
 });
 
 const withConnect = connect(

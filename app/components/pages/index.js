@@ -11,7 +11,7 @@ import PictureTypeDetailPage from './PictureTypeDetailPage';
 import PictureTypeAddOrUpdatePage from './PictureTypeAddOrUpdatePage';
 import LoginPage from './LoginPage';
 import NotFoundPage from './NotFoundPage';
-import ArticleType from './article/ArticleType';
+import ArticleType from './article/ArticleTypeContainer';
 
 const pages = {
   login: LoginPage,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
-import { dashboardRoutes } from './data';
+import { dashboardRoutes } from './routes';
 
 const switchRoutes = (
   <Switch>

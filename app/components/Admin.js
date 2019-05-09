@@ -21,7 +21,7 @@ import Navbar from 'base/components/Navbar/Navbar';
 import Footer from 'base/components/Footer';
 
 import { switchRoutes } from './commons/switchRoutes';
-import { dashboardRoutes } from './commons/data';
+import { dashboardRoutes } from './commons/routes';
 
 class Admin extends Component {
   constructor(props) {

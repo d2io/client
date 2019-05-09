@@ -8,7 +8,6 @@ import {
   FETCH_PICTURE_TYPE_FAILED,
   FETCH_PICTURE_TYPE_SUCCESS,
   PICTURE_TYPE_REQUEST,
-  SET_PICTURE_TYPE_LIST,
 } from './constants';
 
 export const requestPictureType = () => ({
