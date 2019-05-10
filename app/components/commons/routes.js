@@ -33,7 +33,7 @@ const dashboardRoutes = [
   },
   {
     path: '/picture-type/update',
-    name: 'Picture Type Add OR Update',
+    name: 'Picture Type Update',
     exact: true,
     component: pages.pictureTypeAddOrUpdatePage,
   },
@@ -42,6 +42,12 @@ const dashboardRoutes = [
     name: 'Article Type',
     exact: true,
     component: pages.articleType,
+  },
+  {
+    path: '/product-type',
+    name: 'Product Type',
+    exact: true,
+    component: pages.productType,
   },
 ];
 

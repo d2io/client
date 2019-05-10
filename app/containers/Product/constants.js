@@ -1,0 +1,11 @@
+/*
+ *
+ * Product constants
+ *
+ */
+
+// Product Type
+export const PRODUCT_TYPE_REQUEST = 'PRODUCT_TYPE_REQUEST';
+export const FETCH_PRODUCT_TYPE_SUCCESS = 'FETCH_PRODUCT_TYPE_SUCCESS';
+export const FETCH_PRODUCT_TYPE_FAILED = 'FETCH_PRODUCT_TYPE_FAILED';
+export const SET_PRODUCT_TYPE_LIST = 'SET_PRODUCT_TYPE_LIST';

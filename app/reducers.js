@@ -10,6 +10,7 @@ import languageProviderReducer from 'containers/LanguageProvider/reducer';
 import authReducer from 'containers/Auth/reducer';
 import pictureReducer from 'containers/Picture/reducer';
 import articleReducer from 'containers/Article/reducer';
+import productReducer from 'containers/Product/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -21,6 +22,7 @@ export default function createReducer(injectedReducers = {}) {
     auth: authReducer,
     picture: pictureReducer,
     article: articleReducer,
+    product: productReducer,
     ...injectedReducers,
   });
 
