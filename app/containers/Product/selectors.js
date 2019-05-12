@@ -16,7 +16,7 @@ const makeSelectProduct = () =>
 const makeSelectProductTypeList = () =>
   createSelector(
     selectProductDomain,
-    substate => substate.picTypeList,
+    substate => substate.productTypeList,
   );
 
 const makeSelectProductTypeError = () =>

@@ -43,24 +43,24 @@ class ProductTypePage extends React.Component {
       return {
         data: {
           ...dataFields,
-          rows: nextProps.productTypeList.map(articleType => ({
-            id: articleType.id,
-            name: articleType.name,
-            number: articleType.number,
+          rows: nextProps.productTypeList.map(productType => ({
+            id: productType.id,
+            name: productType.name,
+            number: productType.number,
             status: (
               <Chip
-                color="primary"
+                color={productType.isShow ? 'primary' : 'action'}
                 icon={
-                  articleType.isShow ? (
+                  productType.isShow ? (
                     <VisibilityIcon fontSize="small" />
                   ) : (
                     <VisibilityOffIcon fontSize="small" />
                   )
                 }
-                label={articleType.isShow ? ' Hiển thị' : ' Không hiển thị'}
+                label={productType.isShow ? ' Hiển thị' : ' Không hiển thị'}
               />
             ),
-            action: <ActionButton type={articleType} />,
+            action: <ActionButton type={productType} path={nextProps.path} />,
           })),
         },
       };

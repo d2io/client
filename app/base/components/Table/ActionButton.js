@@ -7,35 +7,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import Icon from '@material-ui/core/Icon';
 
-const color = {
-  default: 'primary',
-  detail: 'action',
-  update: 'action',
-  delete: 'error',
-  hide: 'primary',
+const icons = {
+  default: {
+    name: 'visibility',
+    color: 'primary',
+  },
+  detail: {
+    name: 'visibility',
+    color: 'primary',
+  },
+  update: {
+    name: 'edit',
+    color: 'action',
+  },
+  delete: {
+    name: 'delete',
+    color: 'error',
+  },
+  hide: {
+    name: 'visibility_off',
+    color: 'primary',
+  },
 };
 
-const ActionBtn = ({ type, paths }) => (
+const actions = ['detail', 'update', 'hide', 'delete'];
+
+const ActionBtn = ({ type, path }) => (
   <div>
-    {paths.map(path => (
+    {actions.map(action => (
       <Link
         to={{
-          pathname: path.name,
+          pathname: `${path}/detail`,
           state: { type },
-          search: path.action && `?action=${path.action}`,
+          search: action && `?action=${action}`,
         }}
       >
-        <VisibilityIcon color={color[path.action]} fontSize="small" />
+        <Icon color={icons[action].color} fontSize="small">
+          {icons[action].name}
+        </Icon>
       </Link>
     ))}
   </div>
 );
 
 ActionBtn.propTypes = {
-  paths: PropTypes.array.isRequired,
   type: PropTypes.object,
+  path: PropTypes.string,
 };
 
 export default ActionBtn;
