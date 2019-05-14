@@ -49,6 +49,27 @@ const dashboardRoutes = [
     exact: true,
     component: pages.productType,
   },
+  {
+    path: '/product',
+    name: 'Product',
+    exact: true,
+    component: pages.product,
+  },
 ];
 
-export { dashboardRoutes };
+let routes = [];
+
+const setRoutes = raw =>
+  (routes = [
+    ...dashboardRoutes,
+    ...raw.map(route => ({
+      path: route.link,
+      name: route.name,
+      exact: true,
+      component: pages.entity,
+    })),
+  ]);
+
+const getRoutes = () => routes;
+
+export { dashboardRoutes, setRoutes };

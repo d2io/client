@@ -9,19 +9,19 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import {
-  makeSelectProductTypeError,
-  makeSelectProductTypeList,
+  makeSelectProductError,
+  makeSelectProductList,
 } from 'containers/Product/selectors';
-import { fetchProductType } from 'containers/Product/actions';
-import ProductType from './ProductType';
+import { fetchProduct } from 'containers/Product/actions';
+import Product from './Product';
 
 const mapStateToProps = createStructuredSelector({
-  productList: makeSelectProductTypeList(),
-  error: makeSelectProductTypeError(),
+  productList: makeSelectProductList(),
+  error: makeSelectProductError(),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFetchAllType: () => dispatch(fetchProductType()),
+  onFetchAllType: () => dispatch(fetchProduct()),
 });
 
 const withConnect = connect(
@@ -32,4 +32,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   memo,
-)(ProductType);
+)(Product);

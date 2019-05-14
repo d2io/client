@@ -11,6 +11,7 @@ import authReducer from 'containers/Auth/reducer';
 import pictureReducer from 'containers/Picture/reducer';
 import articleReducer from 'containers/Article/reducer';
 import productReducer from 'containers/Product/reducer';
+import entityReducer from 'containers/Entity/reducer';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -23,6 +24,7 @@ export default function createReducer(injectedReducers = {}) {
     picture: pictureReducer,
     article: articleReducer,
     product: productReducer,
+    entity: entityReducer,
     ...injectedReducers,
   });
 

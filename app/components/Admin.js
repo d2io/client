@@ -21,7 +21,7 @@ import Navbar from 'base/components/Navbar/Navbar';
 import Footer from 'base/components/Footer';
 
 import { switchRoutes } from './commons/switchRoutes';
-import { dashboardRoutes } from './commons/routes';
+import Routes from './commons/Routes';
 
 class Admin extends Component {
   constructor(props) {
@@ -79,7 +79,7 @@ class Admin extends Component {
 
         <div className={classes.mainPanel} ref="mainPanel">
           <Navbar
-            routes={dashboardRoutes}
+            routes={Routes.data}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
-import Chip from '@material-ui/core/Chip';
+import Chip from '@material-ui/core/Chip/index';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 
@@ -23,9 +23,9 @@ import CardHeader from 'base/components/Card/CardHeader';
 import CardBody from 'base/components/Card/CardBody';
 import styles from 'components/styles/table';
 
-import dataFields from './fields';
+import dataFields from './product/fields';
 
-class ProductTypePage extends React.Component {
+class EntityPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -35,7 +35,7 @@ class ProductTypePage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onFetchAllType();
+    this.props.onFetchEntity(this.props.path);
   }
 
   static getDerivedStateFromProps(nextProps) {
@@ -76,7 +76,7 @@ class ProductTypePage extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Kiểu sản phẩm</h4>
+              <h4 className={classes.cardTitleWhite}>Sản phẩm</h4>
               <p className={classes.cardCategoryWhite}>Mô tả</p>
             </CardHeader>
 
@@ -100,10 +100,11 @@ class ProductTypePage extends React.Component {
   }
 }
 
-ProductTypePage.propTypes = {
+EntityPage.propTypes = {
   classes: PropTypes.object,
-  onFetchAllType: PropTypes.func.isRequired,
-  productTypeList: PropTypes.array.isRequired,
+  onFetchEntity: PropTypes.func.isRequired,
+  productList: PropTypes.array.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(ProductTypePage);
+export default withStyles(styles)(EntityPage);

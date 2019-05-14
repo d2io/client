@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
-import { dashboardRoutes } from './routes';
+import Routes from './Routes';
 
 const switchRoutes = (
   <Switch>
-    {dashboardRoutes.map((prop, key) => (
+    {Routes.data.map((prop, key) => (
       <PrivateRoute
         path={prop.path}
         exact={prop.exact}

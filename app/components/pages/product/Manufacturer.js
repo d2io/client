@@ -25,7 +25,7 @@ import styles from 'components/styles/table';
 
 import dataFields from './fields';
 
-class ProductTypePage extends React.Component {
+class ProductPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -76,7 +76,7 @@ class ProductTypePage extends React.Component {
         <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Kiểu sản phẩm</h4>
+              <h4 className={classes.cardTitleWhite}>Sản phẩm</h4>
               <p className={classes.cardCategoryWhite}>Mô tả</p>
             </CardHeader>
 
@@ -100,10 +100,10 @@ class ProductTypePage extends React.Component {
   }
 }
 
-ProductTypePage.propTypes = {
+ProductPage.propTypes = {
   classes: PropTypes.object,
   onFetchAllType: PropTypes.func.isRequired,
-  productTypeList: PropTypes.array.isRequired,
+  productList: PropTypes.array.isRequired,
 };
 
-export default withStyles(styles)(ProductTypePage);
+export default withStyles(styles)(ProductPage);

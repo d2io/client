@@ -9,6 +9,7 @@ import authSaga from 'containers/Auth/saga';
 import pictureSaga from 'containers/Picture/saga';
 import articleSaga from 'containers/Article/saga';
 import productSaga from 'containers/Product/saga';
+import entitySaga from 'containers/Entity/saga';
 
 const getRouterSaga = function* rootSaga() {
   yield all([
@@ -16,6 +17,7 @@ const getRouterSaga = function* rootSaga() {
     call(pictureSaga),
     call(articleSaga),
     call(productSaga),
+    call(entitySaga),
   ]);
 };
 

@@ -19,15 +19,29 @@ const makeSelectProductTypeList = () =>
     substate => substate.productTypeList,
   );
 
+const makeSelectProductList = () =>
+  createSelector(
+    selectProductDomain,
+    substate => substate.productList,
+  );
+
 const makeSelectProductTypeError = () =>
   createSelector(
     selectProductDomain,
-    substate => substate.error,
+    substate => substate.error.type,
+  );
+
+const makeSelectProductError = () =>
+  createSelector(
+    selectProductDomain,
+    substate => substate.error.product,
   );
 
 export {
   selectProductDomain,
   makeSelectProduct,
   makeSelectProductTypeList,
+  makeSelectProductList,
   makeSelectProductTypeError,
+  makeSelectProductError,
 };
