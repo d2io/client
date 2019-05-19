@@ -7,12 +7,6 @@ import { initialState } from './reducer';
 
 const selectEntityDomain = state => state.entity || initialState;
 
-const makeSelectEntity = () =>
-  createSelector(
-    selectEntityDomain,
-    substate => substate,
-  );
-
 const makeSelectEntityList = () =>
   createSelector(
     selectEntityDomain,
@@ -25,10 +19,4 @@ const makeSelectEntityError = () =>
     substate => substate.error,
   );
 
-export default makeSelectEntity;
-export {
-  selectEntityDomain,
-  makeSelectEntity,
-  makeSelectEntityList,
-  makeSelectEntityError,
-};
+export { selectEntityDomain, makeSelectEntityList, makeSelectEntityError };

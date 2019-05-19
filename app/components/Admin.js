@@ -20,8 +20,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Navbar from 'base/components/Navbar/Navbar';
 import Footer from 'base/components/Footer';
 
-import { switchRoutes } from './commons/switchRoutes';
-import Routes from './commons/Routes';
+import Routes from './commons/routes';
+import routes from './commons/routes/routes';
 
 class Admin extends Component {
   constructor(props) {
@@ -79,17 +79,17 @@ class Admin extends Component {
 
         <div className={classes.mainPanel} ref="mainPanel">
           <Navbar
-            routes={Routes.data}
+            routes={routes}
             handleDrawerToggle={this.handleDrawerToggle}
             {...rest}
           />
 
           {this.getRoute() ? (
             <div className={classes.content}>
-              <div className={classes.container}>{switchRoutes}</div>
+              <div className={classes.container}>{Routes}</div>
             </div>
           ) : (
-            <div className={classes.map}>{switchRoutes}</div>
+            <div className={classes.map}>{Routes}</div>
           )}
           {this.getRoute() && <Footer />}
         </div>

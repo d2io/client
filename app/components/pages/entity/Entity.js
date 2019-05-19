@@ -23,7 +23,7 @@ import CardHeader from 'base/components/Card/CardHeader';
 import CardBody from 'base/components/Card/CardBody';
 import styles from 'components/styles/table';
 
-import dataFields from './product/fields';
+import dataFields from '../product/fields';
 
 class EntityPage extends React.Component {
   constructor(props) {
@@ -35,15 +35,15 @@ class EntityPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.onFetchEntity(this.props.path);
+    this.props.onFetchEntity(this.props.match.params.entity);
   }
 
   static getDerivedStateFromProps(nextProps) {
-    if (nextProps.productList) {
+    if (nextProps.entities) {
       return {
         data: {
           ...dataFields,
-          rows: nextProps.productList.map(productType => ({
+          rows: nextProps.entities.map(productType => ({
             id: productType.id,
             name: productType.name,
             number: productType.number,
@@ -66,6 +66,12 @@ class EntityPage extends React.Component {
       };
     }
     return null;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.entity !== prevProps.match.params.entity) {
+      this.props.onFetchEntity(this.props.match.params.entity);
+    }
   }
 
   render() {
@@ -102,9 +108,8 @@ class EntityPage extends React.Component {
 
 EntityPage.propTypes = {
   classes: PropTypes.object,
+  match: PropTypes.object.isRequired,
   onFetchEntity: PropTypes.func.isRequired,
-  productList: PropTypes.array.isRequired,
-  path: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(EntityPage);

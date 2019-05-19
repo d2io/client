@@ -17,8 +17,6 @@ import {
   signoutSuccess,
 } from './actions';
 
-import Routes from 'components/commons/Routes';
-
 // Individual exports for testing
 function* doSignOut() {
   // remove token from Cookies
@@ -66,7 +64,6 @@ function* doInitRouteNames() {
   try {
     const res = yield call(axios.get, APINames.ROUTE_NAMES);
     const routes = res.data;
-    Routes.data = routes;
     yield put(initRouteNameSuccess(routes));
   } catch (e) {
     yield put(initRouteNameFailed(e));

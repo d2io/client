@@ -16,7 +16,7 @@ import { fetchEntity } from 'containers/Entity/actions';
 import Entity from './Entity';
 
 const mapStateToProps = createStructuredSelector({
-  productList: makeSelectEntityList(),
+  entities: makeSelectEntityList(),
   error: makeSelectEntityError(),
 });
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
-import Routes from './Routes';
+import routes from './routes';
 
 const switchRoutes = (
   <Switch>
-    {Routes.data.map((prop, key) => (
+    {routes.map((prop, key) => (
       <PrivateRoute
         path={prop.path}
         exact={prop.exact}
@@ -16,4 +16,4 @@ const switchRoutes = (
   </Switch>
 );
 
-export { switchRoutes };
+export default switchRoutes;

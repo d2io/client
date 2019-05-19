@@ -14,7 +14,7 @@ import NotFoundPage from './NotFoundPage';
 import ArticleType from './article/ArticleTypeContainer';
 import Product from './product/ProductContainer';
 import ProductType from './product/ProductTypeContainer';
-import Entity from './EntityContainer';
+import Entity from './entity/EntityContainer';
 
 const pages = {
   login: LoginPage,

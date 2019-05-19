@@ -3,9 +3,10 @@ import axios from 'axios';
 import { FETCH_ENTITY } from './constants';
 import { fetchEntityFailed, fetchEntitySuccess } from './actions';
 
-function* doFetchEntity(url) {
+function* doFetchEntity(data) {
   try {
-    const res = yield call(axios.get, `/api/v1${url}`);
+    debugger;
+    const res = yield call(axios.get, `/api/v1/${data.url}`);
     yield put(fetchEntitySuccess(res.data));
   } catch (e) {
     console.log(`Error is ${e}`);

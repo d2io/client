@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { Redirect, Route } from 'react-router-dom';
 
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { createStructuredSelector } from 'reselect/lib/index';
 import { compose } from 'redux';
 
 import { makeSelectCheckAuthorized } from 'containers/Auth/selectors';
