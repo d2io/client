@@ -14,6 +14,12 @@ const routes = [
     component: pages.dashboard,
   },
   {
+    path: '/picture',
+    name: 'Picture',
+    exact: true,
+    component: pages.picture,
+  },
+  {
     path: '/:entity',
     name: 'Entity',
     exact: true,

@@ -23,7 +23,7 @@ import CardHeader from 'base/components/Card/CardHeader';
 import CardBody from 'base/components/Card/CardBody';
 import styles from 'components/styles/table';
 
-import dataFields from '../product/fields';
+import dataFields from './fields';
 
 class EntityPage extends React.Component {
   constructor(props) {
@@ -43,24 +43,24 @@ class EntityPage extends React.Component {
       return {
         data: {
           ...dataFields,
-          rows: nextProps.entities.map(productType => ({
-            id: productType.id,
-            name: productType.name,
-            number: productType.number,
+          rows: nextProps.entities.map(entity => ({
+            id: entity.id,
+            name: entity.name || entity.title,
+            number: entity.number,
             status: (
               <Chip
-                color={productType.isShow ? 'primary' : 'action'}
+                color={entity.isShow ? 'primary' : 'action'}
                 icon={
-                  productType.isShow ? (
+                  entity.isShow ? (
                     <VisibilityIcon fontSize="small" />
                   ) : (
                     <VisibilityOffIcon fontSize="small" />
                   )
                 }
-                label={productType.isShow ? ' Hiển thị' : ' Không hiển thị'}
+                label={entity.isShow ? ' Hiển thị' : ' Không hiển thị'}
               />
             ),
-            action: <ActionButton type={productType} path={nextProps.path} />,
+            action: <ActionButton type={entity} path={nextProps.path} />,
           })),
         },
       };

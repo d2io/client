@@ -5,7 +5,6 @@ import { fetchEntityFailed, fetchEntitySuccess } from './actions';
 
 function* doFetchEntity(data) {
   try {
-    debugger;
     const res = yield call(axios.get, `/api/v1/${data.url}`);
     yield put(fetchEntitySuccess(res.data));
   } catch (e) {
