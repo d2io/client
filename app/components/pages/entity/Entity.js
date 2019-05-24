@@ -60,7 +60,7 @@ class EntityPage extends React.Component {
                 label={entity.isShow ? ' Hiển thị' : ' Không hiển thị'}
               />
             ),
-            action: <ActionButton type={entity} path={nextProps.path} />,
+            action: <ActionButton type={entity} path={nextProps.match.url} />,
           })),
         },
       };

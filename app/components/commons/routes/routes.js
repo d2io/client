@@ -25,6 +25,12 @@ const routes = [
     exact: true,
     component: pages.entity,
   },
+  {
+    path: '/:entity/detail',
+    name: 'Entity Detail',
+    exact: true,
+    component: pages.entityDetail,
+  },
 ];
 
 export default routes;
