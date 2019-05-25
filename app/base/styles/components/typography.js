@@ -43,6 +43,7 @@ const typography = {
   dangerText: {
     color: dangerColor[0],
   },
+  useNextVariants: true,
 };
 
 export default typography;

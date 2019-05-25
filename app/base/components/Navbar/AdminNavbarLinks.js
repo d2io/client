@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import Cookies from 'js-cookie';
+import { withRouter } from "react-router-dom";
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -51,7 +53,10 @@ class HeaderLinks extends React.Component {
 
   handleClickMenuEntry = entry => event => {
     // TODO: handle invidual cases
-    if (this.state.type === 'logout' && entry === 1) alert('Đăng xuất');
+    if (this.state.type === 'logout' && entry === 1) {
+      Cookies.remove('token');
+      this.props.history.push("/login");
+    }
   };
 
   render() {
@@ -141,4 +146,4 @@ HeaderLinks.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(headerLinksStyle)(HeaderLinks);
+export default withStyles(headerLinksStyle)(withRouter(HeaderLinks));

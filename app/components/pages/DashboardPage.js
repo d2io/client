@@ -50,6 +50,7 @@ class Dashboard extends React.Component {
   state = {
     value: 0,
   };
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -57,6 +58,7 @@ class Dashboard extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+
   render() {
     const { classes } = this.props;
     return (

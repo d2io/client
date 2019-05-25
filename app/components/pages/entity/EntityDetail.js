@@ -5,12 +5,19 @@
  *
  */
 
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-// @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles';
+import clsx from 'clsx';
+import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 
+// @material-ui/core components
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -22,28 +29,138 @@ import CardHeader from 'base/components/Card/CardHeader';
 import CardBody from 'base/components/Card/CardBody';
 import styles from 'components/styles/table';
 
-class EntityDetailPage extends React.Component {
-  constructor(props) {
-    super(props);
+const useStyles = makeStyles(theme => ({
+  ...styles,
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  dense: {
+    marginTop: theme.spacing(2),
+  },
+  menu: {
+    width: 200,
+  },
+}));
 
-    this.state = {};
+function EntityDetailPage() {
+  const classes = useStyles();
+
+  const [values, setValues] = useState({
+    age: '',
+    name: 'hai',
+  });
+
+  const inputLabel = useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
+
+  function handleChange(event) {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value,
+    }));
   }
 
-  render() {
-    const { classes } = this.props;
+  return (
+    <GridContainer>
+      <GridItem xs={12} sm={12} md={12}>
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Sản phẩm</h4>
+            <p className={classes.cardCategoryWhite}>Mô tả</p>
+          </CardHeader>
 
-    return (
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Sản phẩm</h4>
-              <p className={classes.cardCategoryWhite}>Mô tả</p>
-            </CardHeader>
+          <CardBody>
+            <form className={classes.root} autoComplete="off">
+              <TextField
+                id="outlined-title"
+                label="Tiêu đề bài viết"
+                defaultValue="foo"
+                fullWidth
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+              />
 
-            <CardBody>
+              <TextField
+                id="outlined-title"
+                label="SEO Uri"
+                defaultValue="foo"
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                fullWidth
+              />
+
+              <TextField
+                id="outlined-title"
+                label="SEO Title"
+                defaultValue="foo"
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                fullWidth
+              />
+
+              <TextField
+                id="outlined-title"
+                label="SEO Description"
+                defaultValue="foo"
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                fullWidth
+              />
+
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel ref={inputLabel} htmlFor="outlined-age-simple">
+                  Loại bài viết
+                </InputLabel>
+                <Select
+                  value={values.age}
+                  onChange={handleChange}
+                  autoWidth
+                  input={
+                    <OutlinedInput
+                      labelWidth={labelWidth}
+                      name="age"
+                      id="outlined-age-simple"
+                    />
+                  }
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                id="outlined-title"
+                label="Sản phẩm liên quan"
+                defaultValue="foo"
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+                fullWidth
+              />
+
               <CKEditor
                 editor={ClassicEditor}
+                className={classes.textField}
                 data="<p>Hello from CKEditor 5!</p>"
                 onInit={editor => {
                   // You can store the "editor" and use when it is needed.
@@ -60,16 +177,16 @@ class EntityDetailPage extends React.Component {
                   console.log('Focus.', editor);
                 }}
               />
-            </CardBody>
-          </Card>
-        </GridItem>
-      </GridContainer>
-    );
-  }
+            </form>
+          </CardBody>
+        </Card>
+      </GridItem>
+    </GridContainer>
+  );
 }
 
 EntityDetailPage.propTypes = {
   classes: PropTypes.object,
 };
 
-export default withStyles(styles)(EntityDetailPage);
+export default EntityDetailPage;
