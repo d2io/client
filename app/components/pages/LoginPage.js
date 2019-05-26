@@ -9,22 +9,53 @@ import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Paper from '@material-ui/core/Paper';
+import Security from '@material-ui/icons/Security';
+import red from '@material-ui/core/colors/red';
 import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
 import { Redirect } from 'react-router-dom';
-import styles from './styles/login';
 
-const Login = ({ classes, onSignIn }) => {
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import messages from 'components/messages';
+
+const Login = ({ onSignIn, intl }) => {
   const [redirectToReferrer] = useState(false); // TODO: change to do check user in exist in store
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const useStyles = makeStyles(theme => ({
+    '@global': {
+      body: {
+        backgroundColor: theme.palette.common.white,
+      },
+    },
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: red[500],
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
+  const classes = useStyles();
 
   const login = () => {
     onSignIn({
@@ -37,63 +68,78 @@ const Login = ({ classes, onSignIn }) => {
     return <Redirect to="/" />;
   }
 
+  const { formatMessage } = intl;
+
   return (
-    <main className={classes.main}>
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Paper className={classes.paper}>
+      <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <Security />
         </Avatar>
-
         <Typography component="h1" variant="h5">
-          Sign in
+          <FormattedMessage {...messages.login} />
         </Typography>
-
-        <form className={classes.form}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="email">Email Address</InputLabel>
-            <Input
-              id="usernameOrEmail"
-              autoComplete="email"
-              autoFocus
-              value={usernameOrEmail}
-              onChange={e => setUsernameOrEmail(e.target.value)}
-            />
-          </FormControl>
-
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="password">Password</InputLabel>
-            <Input
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-          </FormControl>
-
+        <div className={classes.form}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label={formatMessage(messages.account)}
+            name="email"
+            autoComplete="email"
+            autoFocus
+            onChange={e => setUsernameOrEmail(e.target.value)}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label={formatMessage(messages.password)}
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            onChange={e => setPassword(e.target.value)}
+          />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label={formatMessage(messages.remember)}
           />
           <Button
+            type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
             onClick={login}
           >
-            Sign in
+            <FormattedMessage {...messages.login} />
           </Button>
-        </form>
-      </Paper>
-    </main>
+        </div>
+        <Grid container>
+          <Grid item xs>
+            <Link href="#" variant="body2">
+              <FormattedMessage {...messages.forgotPassword} />
+            </Link>
+          </Grid>
+          <Grid item>
+            <Link href="#" variant="body2">
+              <FormattedMessage {...messages.signupPrompt} />
+            </Link>
+          </Grid>
+        </Grid>
+      </div>
+    </Container>
   );
 };
 
 Login.propTypes = {
-  classes: PropTypes.object.isRequired,
   onSignIn: PropTypes.func,
+  intl: intlShape.isRequired,
 };
 
-export default withStyles(styles)(Login);
+export default injectIntl(Login);

@@ -43,4 +43,34 @@ export default defineMessages({
     id: `${scope}.dnd`,
     defaultMessage: 'Kéo thả tệp vào đây hoặc click',
   },
+
+  login: {
+    id: `${scope}.login`,
+    defaultMessage: 'Đăng nhập',
+  },
+
+  account: {
+    id: `${scope}.account`,
+    defaultMessage: 'Tài khoản',
+  },
+
+  password: {
+    id: `${scope}.password`,
+    defaultMessage: 'Mật khẩu',
+  },
+
+  forgotPassword: {
+    id: `${scope}.forgotPassword`,
+    defaultMessage: 'Quên mật khẩu',
+  },
+
+  remember: {
+    id: `${scope}.remember`,
+    defaultMessage: 'Nhớ tài khoản',
+  },
+
+  signupPrompt: {
+    id: `${scope}.signupPrompt`,
+    defaultMessage: 'Chưa có tài khoản? Đăng ký',
+  },
 });
